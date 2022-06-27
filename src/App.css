@@ -1,4 +1,60 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  min-height: 50px;
+  background-color:darkgreen;
 }
 
+.nav li {
+  color: white;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.nav-links {
+  font-size: 15px;
+  width: auto;
+  margin-right: 50px;
+  justify-content: space-between;
+  list-style-type: none;
+  /* text-decoration: none; */
+}
+
+.about {
+  margin-right: 15px;
+  margin-left: 15px;
+  text-align: center;
+  font-size: 15px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.dealer {
+  text-align: justify;
+}
+
+.player {
+  position: absolute;
+  bottom: 0
+}
+
+.stand {
+  text-align: right;
+  margin-top: 150px;
+  margin-right: 40px; 
+
+}
+
+.hit {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 40px; 
+}
+
+.split {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 40px; 
+}

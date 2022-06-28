@@ -4,7 +4,7 @@
 
 .nav {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   min-height: 50px;
   background-color:darkgreen;
 }
@@ -40,21 +40,35 @@
   bottom: 0
 }
 
-.stand {
+button {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+button .play {
+  text-align: center;
+}
+
+button .stand {
   text-align: right;
   margin-top: 150px;
   margin-right: 40px; 
-
 }
 
-.hit {
+button .hit {
   text-align: right;
   margin-top: 10px;
   margin-right: 40px; 
 }
 
-.split {
+button .split {
   text-align: right;
   margin-top: 10px;
   margin-right: 40px; 
+}
+
+button .double {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 40px;
 }

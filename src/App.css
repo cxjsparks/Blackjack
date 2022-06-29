@@ -1,6 +1,7 @@
-/* .App {
+.App {
   text-align: center;
-} */
+  background-color: darkgreen;
+}
 
 .nav {
   display: flex;
@@ -37,8 +38,7 @@
 
 .player {
   position: absolute;
-  bottom: 0
-}
+  bottom: 75px}
 
 button {
   margin-right: 10px;
@@ -71,4 +71,14 @@ button .double {
   text-align: right;
   margin-top: 10px;
   margin-right: 40px;
+
 }
+
+.attribute {
+  position: absolute;
+  bottom: 0;
+  font-size: 10px;
+  margin-left: 10px;
+  /* background-color: darkgreen; */
+}
+

@@ -17,7 +17,8 @@ const Blackjack = () => {
                     <button className="double">Double Down</button>
         </div>
     )  
-   
+
+
     // When clicking on the let's play button,
 
     // deal card1 to player

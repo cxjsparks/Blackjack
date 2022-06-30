@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 
 
-const Cards = () => {
+const CardDeckList = () => {
 
 
-
-        const deck = [
+// remove component and import as function
+        return [
             "/assets/Clubs Ace.svg",
             "/assets/Clubs 2.svg",
             "/assets/Clubs 3.svg",
@@ -61,44 +61,9 @@ const Cards = () => {
             "/assets/Spades Q.svg",
             "/assets/Spades K.svg",
         ];
-
-        
-    let cardDeck = deck.map((item) => {
-        return (
-            <div>
-                <img className="card" src={item} />
-            </div>)
-           
-        })
-
-        return (
-  
-            <div>
-                {cardDeck.map((item) => {
-                return item
-                })}
-            </div>
-    )
-
     
 }
 
-export default Cards;
+export default CardDeckList;
 
       
-// const buildDeck = () => {
-//     for (let i = 2; i <= 10; i++)
-//         for (const deck of deck)
-//             deck.push(i + deck);
-
-
-//     // return  _.shuffle(deck);
-// };
-
-// function randomCard() {
-//     const random = Math.floor(Math.random() * 51);
-//     const card = document.createElement("div");
-//     document.body.appendChild(card);
-//   }
-//   const cards = cardDeck();
-//   randomCard(cards);

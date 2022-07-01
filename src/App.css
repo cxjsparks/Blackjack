@@ -1,18 +1,18 @@
 .App {
   text-align: center;
-  background-color: darkgreen;
+  background-color: rgb(10, 149, 10);
+  font-family:'Times New Roman', Times, serif;
+  min-height: 100vh;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
   min-height: 50px;
-  background-color:darkgreen;
 }
 
 .nav li {
   color: white;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .nav-links {
@@ -21,7 +21,6 @@
   margin-right: 50px;
   justify-content: space-between;
   list-style-type: none;
-  /* text-decoration: none; */
 }
 
 .about {
@@ -29,20 +28,30 @@
   margin-left: 15px;
   text-align: center;
   font-size: 15px;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .dealer {
   text-align: justify;
+  color: white;
+
 }
 
 .player {
   position: absolute;
-  bottom: 75px}
+  bottom: 75px
+}
+
+.play {
+  font-family:fantasy;
+  text-align: justify;
+  text-decoration: none;
+  color: rgb(29, 26, 232);
+}
 
 button {
   margin-right: 10px;
   margin-left: 10px;
+  border-radius: 10px;
 }
 
 button .play {
@@ -77,12 +86,22 @@ button .double {
 .attribute {
   position: absolute;
   bottom: 0;
-  font-size: 10px;
+  font-size: 12px;
   margin-left: 10px;
-  /* background-color: darkgreen; */
+  /* background-color: rgb(10, 149, 10); */
 }
 
-.card {
+.cards {
   max-width: 90px;
   max-height: 105px;
+  border: .5px solid black;
+  margin-left: 10px;
+}
+
+.dealer {
+
+}
+
+.player {
+  
 }

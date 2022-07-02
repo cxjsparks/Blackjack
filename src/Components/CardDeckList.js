@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 const CardDeckList = () => {
 
 
-// remove component and import as function
         return [
-            "/assets/ClubsAce.svg",
-            "/assets/Clubs2.svg",
+            {source: "/assets/ClubsAce.svg", value: 1},
+            {source: "/assets/Clubs2.svg", value: 2},
+            
             "/assets/Clubs3.svg",
             "/assets/Clubs4.svg",
             "/assets/Clubs5.svg",
@@ -63,6 +63,8 @@ const CardDeckList = () => {
         ];
     
 }
+
+
 
 export default CardDeckList;
 

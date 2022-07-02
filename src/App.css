@@ -51,7 +51,7 @@
 button {
   margin-right: 10px;
   margin-left: 10px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 button .play {
@@ -103,5 +103,5 @@ button .double {
 }
 
 .player {
-  
+
 }

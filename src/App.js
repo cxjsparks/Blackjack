@@ -2,9 +2,9 @@ import React from "react"
 import './App.css';
 import { Link, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from 'react'
+// import image from './img//Back.jpeg'
 import About from "./Components/About"
 import Navbar from "./Components/Navbar"
-
 import Blackjack from "./Components/Blackjack"
 import Home from "./Components/Home"
 
@@ -12,11 +12,10 @@ import Home from "./Components/Home"
 function App() {
 
 
-  
-
 
   return (
     <div className="App">
+      {/* <div style={{ backgroundImage: `url(${image})` }}></div> */}
 
 
 
@@ -32,12 +31,6 @@ function App() {
           {/* <Route path="/Table" element={ <Table />} /> */}
 
         </Routes>
-
-
-
-
-
-
     
     
     </div>

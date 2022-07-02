@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import CardDeckList from "./CardDeckList";
-import Home from "./Home";
 import Attribute from "./Attribute";
 
 
@@ -8,40 +7,43 @@ function Blackjack() {
     const [allCards, setAllCards] = useState(CardDeckList())
     const [pCards, setPCards] = useState([]) 
     const [dCards, setDCards] = useState([])
-    const [shuffleDeck, setShuffleDeck] = useState([])
-    const shuffleCards = () => {
+    const [shuffledDeck, setShuffledDeck] = useState([])
+          
 
+    function shuffleDeck(input) {
+        let CardList = [...input]
+        for(var i = 0; i < CardList.length; i++) {
+            var tempCard = CardList[i];
+            var randomIndex = Math.floor(Math.random() * CardList.length);
+            CardList[i] = CardList[randomIndex];
+            CardList[randomIndex] = tempCard;
+        }
+        return CardList;
     }
+
+
     const handleGameStart = () => {
-        shuffleCards ()
-
-
-        let allCardsCopy = [...allCards]
-        // shift will take card from array
+        // shuffle cards
+        let shuffledCards = shuffleDeck(allCards)
+        if (allCards.length < 15) {
+            shuffledCards = shuffleDeck(CardDeckList())
+        }
+        let allCardsCopy = [...shuffledCards]
+        // shift to remove one card from all cards, give one to player
         let newPlayersCards = [allCardsCopy.shift()]
-
+       // shift to remove one card from all cards, give one to dealer
         let newDealersCards = [allCardsCopy.shift()]
-
+        // shift to remove one card from all cards, give second card to player
         newPlayersCards.push(allCardsCopy.shift())
-
+        // shift to remove one card from all cards, give second one to dealer
         newDealersCards.push(allCardsCopy.shift())
-
+        // 48 cards left in deck
         setAllCards (allCardsCopy)
-
+        // player has 2 cards
         setPCards (newPlayersCards)
-
+        // dealer has 2 cards
         setDCards (newDealersCards)
-
-
     }
-
-    // const shuffleDeck = () => {
-    //     let shuffledDeck = [...cards, ...cards]
-    //     .sort(() => Math.random())
-    //     .map((card) => ({ ...card, id: Math.random() }))
-    //     setCards(shuffledCards))
-          
-          
 
 
     return (
@@ -49,20 +51,23 @@ function Blackjack() {
             <div>
                 <p>Start your game!</p>
                 <button onClick={handleGameStart}>
+                {/* <button onClick={()=> {handleGameStart(); {shuffleDeck()}}}> */}
                     Deal
                 </button>
             </div>
 
-
             <h3>Dealer</h3>
+
             <div className="dealer">
                 {dCards.map(card => (
-                    <img className="cards" src={card} key={card}></img>
+                    <img className="cards" src={card.source} key={card.source}></img>
                 ))}
             </div>
 
             <div className="actionControls">
+                {/* on click, add a card to player's cards */}
                 <button className="hit">Hit</button>
+                {/* on click, show dealer's cards */}
                 <button className="stand">Stand</button>
                 {/* <button className="split">Split</button> */}
                 {/* <button className="double">Double Down</button> */}
@@ -70,26 +75,20 @@ function Blackjack() {
 
             <div className="player">
             {pCards.map(card => (
-                    <img className="cards" src={card} key={card}></img>
+                    <img className="cards" src={card.source} key={card.source}></img>
                 ))}
             </div>
 
             <h3>Player</h3>
 
-
-
-          
-
             <div>
                 <Attribute></Attribute>
             </div>
-        </div>
 
+        </div>
       );
 }
 
-
- 
 export default Blackjack;
 
 // const  = () => {
@@ -133,3 +132,12 @@ export default Blackjack;
 // }
  
 
+        // const shuffleDeck = () => {
+        //     const shuffledDeck = [...CardList, ...CardList]
+        //     .sort(() => 
+        //         Math.random())
+        //         .map((allCards) => ({ ...CardList, id: Math.random() }),
+
+        //         setAllCards(shuffledDeck)
+
+        //     )

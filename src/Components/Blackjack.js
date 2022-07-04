@@ -3,11 +3,21 @@ import CardDeckList from "./CardDeckList";
 import Attribute from "./Attribute";
 
 
-function Blackjack() {
+function Blackjack(props) {
     const [allCards, setAllCards] = useState(CardDeckList())
     const [pCards, setPCards] = useState([]) 
     const [dCards, setDCards] = useState([])
     const [shuffledDeck, setShuffledDeck] = useState([])
+    const [pCardsTotal, setPCardsTotal] = useState(0)
+    const [dCardsTotal, setDCardsTotal] = useState(0)
+    const [notDTurn, setNotDTurn] = useState(true)
+    const [gameActive, setGameActive] = useState(false)
+    let playerMax
+    let dealerMax
+    let number = props.number
+    let setNumber = props.setNumber
+    let endOfGameMessage = ""
+
           
 
     function shuffleDeck(input) {
@@ -24,6 +34,8 @@ function Blackjack() {
 
     const handleGameStart = () => {
         // shuffle cards
+        let pCardsSum = 0
+        let dCardsSum = 0
         let shuffledCards = shuffleDeck(allCards)
         if (allCards.length < 15) {
             shuffledCards = shuffleDeck(CardDeckList())
@@ -31,55 +43,190 @@ function Blackjack() {
         let allCardsCopy = [...shuffledCards]
         // shift to remove one card from all cards, give one to player
         let newPlayersCards = [allCardsCopy.shift()]
-       // shift to remove one card from all cards, give one to dealer
+        console.log(newPlayersCards)
+        // get sum of player's card
+        pCardsSum += newPlayersCards[0].value 
+        // console.log(newPlayersCards[0].value)
+        // shift to remove one card from all cards, give one (face down) to dealer
         let newDealersCards = [allCardsCopy.shift()]
+        // get sum of dealer's card
+        dCardsSum += newDealersCards[0].value
         // shift to remove one card from all cards, give second card to player
         newPlayersCards.push(allCardsCopy.shift())
+        // get new value of player's cards
+        pCardsSum += newPlayersCards[1].value
+        console.log(newPlayersCards[1].value)
         // shift to remove one card from all cards, give second one to dealer
         newDealersCards.push(allCardsCopy.shift())
+        // get new value of dealer's cards
+        dCardsSum += newDealersCards[1].value
+        // dCardsSum += newDealersCards.value
         // 48 cards left in deck
         setAllCards (allCardsCopy)
         // player has 2 cards
         setPCards (newPlayersCards)
         // dealer has 2 cards
         setDCards (newDealersCards)
+        // total sum of players cards after first two cards dealt
+        setPCardsTotal (pCardsSum)
+        // total sum of players cards after first two cards dealt
+        setDCardsTotal (dCardsSum)
+        console.log(pCards)
+
+        if (pCards.some(card => card.value === 1)) {
+            playerMax = pCardsSum + 10
+        }
+
+
+        // for (const card of newPlayersCards) {
+        //     console.log(card.value)
+        //     if (card.value === 1) {
+        //         playerMax = pCardsSum + 10
+        //         console.log("ace")
+        //     } else {
+        //         playerMax = pCardsSum
+        //     }
+        //     }
+        
+        // for (const card of newDealersCards) {
+        //     console.log(card.value)
+        //     if (card.value === 1) {
+        //         dealerMax = dCardsSum + 10
+        //         console.log("ace")
+        //     } else {
+        //         dealerMax = dCardsSum
+        //     }
+        //     }
+        console.log(pCardsSum)
+
+        // if player and dealer both have blackjack, it's a tie
+        if ((dCardsSum === 21 || dealerMax === 21) && (pCardsSum === 21 || playerMax === 21)) {
+            endOfGameMessage = "Tied, game over. Play again!"
+        // if dealer has 21, dealer wins, game over
+        } else if 
+            ((dCardsSum === 21 || dealerMax === 21) && pCardsSum < 21) {
+        // if player has 21, player wins, game over
+        } else if
+            ((pCardsSum === 21 || playerMax === 21)) {
+                endOfGameMessage = "Player wins. Play again!"
+        }
+        else 
+            {setGameActive (true)}
+}
+    
+    // dealing another card to player when player clicks on hit
+    function addPlayerCard() {
+        let pCardsSum = pCardsTotal
+        let dCardsSum = dCardsTotal
+
+        
+        console.log(pCardsSum)
+        if (pCardsSum < 21) {
+        // creating player's new hand with any added cards
+        let playerNewHand = pCards
+        // getting deck with remaining cards
+        let allCardsCopy = allCards
+        // updating players hand to include new card
+        playerNewHand.push(allCardsCopy.shift())
+        // adding sum of new card to player's hand
+        pCardsSum += playerNewHand[playerNewHand.length-1].value
+        console.log(playerNewHand)
+        // cards left in deck
+        setAllCards (allCardsCopy)
+        // player has 3 (or more) cards
+        setPCards (playerNewHand)
+        // if player goes over 21, cannot hit anymore
+        if (pCardsSum > 21) {
+            endOfGameMessage = "Player busts. Play again!"
+        }
+        setNumber (number + 1)
+        // get total sum of player's cards
+        setPCardsTotal (pCardsSum)
+        console.log(pCardsSum)
+
+    }}
+
+    function addDealerCard() {
+        setNotDTurn (false)
+        let pCardsSum = pCardsTotal
+        let dCardsSum = dCardsTotal
+        console.log(dCardsSum)
+        let dealerNewHand = dCards
+        let allCardsCopy = allCards
+
+        // if dealer has less than 17, add a new card to dealer's hand
+        if (dCardsSum < 17) {
+            dealerNewHand.push(allCardsCopy.shift())
+        console.log(dCardsSum)
+        // if dealer has 17 or more, compare hands to see who wins
+        dCardsSum += dealerNewHand[dealerNewHand.length-1].value
+        } else if (pCardsSum > dCardsSum) {
+            endOfGameMessage = "Player wins. Play again!"
+        } else if (dCardsSum > pCardsSum) {
+            endOfGameMessage = "Dealer wins. Play again!"
+        } 
+        console.log(dCardsSum)
+        // cards left in deck
+        setAllCards (allCardsCopy)
+        // dealer has 3 (or more) cards if dealer took hits
+        setDCards (dealerNewHand)
+        setNumber (number + 1)
+        // get total sum of dealer's cards
+        setDCardsTotal (dCardsSum)
+        console.log(dCardsSum)
     }
 
-
+    let buttons
+    if (gameActive) {
+        buttons =  
+        <div className="actionControls">
+        <button className="hit" onClick={addPlayerCard}>Hit</button>
+        <br></br>
+        <button className="stand" onClick={addDealerCard}>Stand</button>
+        </div>
+       } else {buttons = <div className="actionControls"/>}
+    
     return (
         <div>
             <div>
                 <p>Start your game!</p>
                 <button onClick={handleGameStart}>
-                {/* <button onClick={()=> {handleGameStart(); {shuffleDeck()}}}> */}
                     Deal
                 </button>
+
+                {/* <div>
+                    <img className="back" src="./assets/Back.jpeg" alt="card back" />
+                </div> */}
+
             </div>
+                <h3 className="dealer">Dealer</h3>
 
-            <h3>Dealer</h3>
-
-            <div className="dealer">
-                {dCards.map(card => (
+            <div>
+            {dCards.map((card, index) => {
+                console.log(dCards)
+                return (
+                    notDTurn && index === 0 ?
+                    <img className="back" src="./assets/Back.jpeg" alt="card back" /> :
                     <img className="cards" src={card.source} key={card.source}></img>
-                ))}
+                )
+                }
+                )
+            }
             </div>
 
-            <div className="actionControls">
-                {/* on click, add a card to player's cards */}
-                <button className="hit">Hit</button>
-                {/* on click, show dealer's cards */}
-                <button className="stand">Stand</button>
-                {/* <button className="split">Split</button> */}
-                {/* <button className="double">Double Down</button> */}
-            </div>
 
-            <div className="player">
+
+            {buttons}
+
+
+
+            <div>
             {pCards.map(card => (
                     <img className="cards" src={card.source} key={card.source}></img>
                 ))}
             </div>
 
-            <h3>Player</h3>
+            <h3 className="player">Player</h3>
 
             <div>
                 <Attribute></Attribute>
@@ -91,53 +238,7 @@ function Blackjack() {
 
 export default Blackjack;
 
-// const  = () => {
 
 
-
-           
-            
-          
-          
-          
-    // let cardDeck = deck.map((item) => {
-    //           // move to table and map over dealersCard and playersCard to display state as images
-    //     return (
-    //         <div>
-    //             <img className="card" src={item} />
-    //         </div>)
-                 
-    //         })
-          
-    //     return (
-          
-    //         <div>
-    //             {cardDeck.map((item) => {
-    //                 return item
-    //             })}
-    //         </div>
-        // )
-    //     <div className="grid">
-    //     {cardDeck.map(card => (
-    //       <div className="card" key={card.id}>
-    //         <div>
-    //           <img className="face" src={card.src} alt="front of card" />
-    //           <img className="back" src="/assets/Back.jpeg" alt="back of card" />
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    //  }
-     
-// }
- 
-
-        // const shuffleDeck = () => {
-        //     const shuffledDeck = [...CardList, ...CardList]
-        //     .sort(() => 
-        //         Math.random())
-        //         .map((allCards) => ({ ...CardList, id: Math.random() }),
-
-        //         setAllCards(shuffledDeck)
-
-        //     )
+                {/* <button className="split">Split</button> */}
+                {/* <button className="double">Double Down</button> */}

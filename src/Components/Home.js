@@ -9,7 +9,7 @@ const Home = ()=> {
             <br />
             <h3>If you've never played or are a beginner, here are some general guidelines for standing or hitting, based on what the dealer and you are showing.</h3>
             <ul className="play">
-                <Link style={{textDecoration: "none", color: "blue" }} to="/blackjack">Let's Play!</Link>
+                <Link className="link" style={{textDecoration: "none", color: "red" }} to="/blackjack">Let's Play!</Link>
             </ul>
         </div>
     )

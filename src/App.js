@@ -11,6 +11,7 @@ import Home from "./Components/Home"
 
 function App() {
 
+  const [number, setNumber] = useState(0)
 
 
   return (
@@ -26,7 +27,7 @@ function App() {
         <Routes>
 
           <Route path="/home" element={ <Home />} />
-          <Route path="/blackjack" element={ <Blackjack />} />
+          <Route path="/blackjack" element={ <Blackjack number={number} setNumber={setNumber} />} />
           <Route path="/about" element={ <About />} />
           {/* <Route path="/Table" element={ <Table />} /> */}
 

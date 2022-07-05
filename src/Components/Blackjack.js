@@ -65,18 +65,24 @@ function Blackjack(props) {
         setAllCards (allCardsCopy)
         // player has 2 cards
         setPCards (newPlayersCards)
+        console.log(newPlayersCards)
         // dealer has 2 cards
         setDCards (newDealersCards)
         // total sum of players cards after first two cards dealt
         setPCardsTotal (pCardsSum)
         // total sum of players cards after first two cards dealt
         setDCardsTotal (dCardsSum)
-        console.log(pCards)
 
-        if (pCards.some(card => card.value === 1)) {
-            playerMax = pCardsSum + 10
+
+        if (newPlayersCards.some(card => card.value === 1)) {
+            pCardsSum = pCardsSum + 10
+        }
+        if (newDealersCards.some(card => card.value === 1)) {
+            dCardsSum = dCardsSum + 10
         }
 
+        console.log(pCardsSum)
+        console.log(dCardsSum)
 
         // for (const card of newPlayersCards) {
         //     console.log(card.value)
@@ -97,7 +103,7 @@ function Blackjack(props) {
         //         dealerMax = dCardsSum
         //     }
         //     }
-        console.log(pCardsSum)
+    
 
         // if player and dealer both have blackjack, it's a tie
         if ((dCardsSum === 21 || dealerMax === 21) && (pCardsSum === 21 || playerMax === 21)) {
@@ -203,7 +209,7 @@ function Blackjack(props) {
 
             <div>
             {dCards.map((card, index) => {
-                console.log(dCards)
+                // console.log(dCards)
                 return (
                     notDTurn && index === 0 ?
                     <img className="back" src="./assets/Back.jpeg" alt="card back" /> :

@@ -12,13 +12,12 @@ function Blackjack(props) {
     const [dCardsTotal, setDCardsTotal] = useState(0)
     const [notDTurn, setNotDTurn] = useState(true)
     const [gameActive, setGameActive] = useState(false)
+    const [gameOver, setGameOver] = useState(false)
     let playerMax
     let dealerMax
     let number = props.number
     let setNumber = props.setNumber
     let endOfGameMessage = ""
-
-          
 
     function shuffleDeck(input) {
         let CardList = [...input]
@@ -31,9 +30,9 @@ function Blackjack(props) {
         return CardList;
     }
 
-
     const handleGameStart = () => {
         // shuffle cards
+        setNotDTurn(true)
         let pCardsSum = 0
         let dCardsSum = 0
         let shuffledCards = shuffleDeck(allCards)
@@ -42,8 +41,8 @@ function Blackjack(props) {
         }
         let allCardsCopy = [...shuffledCards]
         // shift to remove one card from all cards, give one to player
+
         let newPlayersCards = [allCardsCopy.shift()]
-        console.log(newPlayersCards)
         // get sum of player's card
         pCardsSum += newPlayersCards[0].value 
         // console.log(newPlayersCards[0].value)
@@ -55,7 +54,6 @@ function Blackjack(props) {
         newPlayersCards.push(allCardsCopy.shift())
         // get new value of player's cards
         pCardsSum += newPlayersCards[1].value
-        console.log(newPlayersCards[1].value)
         // shift to remove one card from all cards, give second one to dealer
         newDealersCards.push(allCardsCopy.shift())
         // get new value of dealer's cards
@@ -65,7 +63,6 @@ function Blackjack(props) {
         setAllCards (allCardsCopy)
         // player has 2 cards
         setPCards (newPlayersCards)
-        console.log(newPlayersCards)
         // dealer has 2 cards
         setDCards (newDealersCards)
         // total sum of players cards after first two cards dealt
@@ -73,39 +70,16 @@ function Blackjack(props) {
         // total sum of players cards after first two cards dealt
         setDCardsTotal (dCardsSum)
 
-
+        // check to see if one of the player's cards is an ace, add 10 if true
         if (newPlayersCards.some(card => card.value === 1)) {
             pCardsSum = pCardsSum + 10
         }
+        // check to see if one of the dealer's cards is an ace, add 10 if true
         if (newDealersCards.some(card => card.value === 1)) {
             dCardsSum = dCardsSum + 10
         }
 
-        console.log(pCardsSum)
-        console.log(dCardsSum)
-
-        // for (const card of newPlayersCards) {
-        //     console.log(card.value)
-        //     if (card.value === 1) {
-        //         playerMax = pCardsSum + 10
-        //         console.log("ace")
-        //     } else {
-        //         playerMax = pCardsSum
-        //     }
-        //     }
-        
-        // for (const card of newDealersCards) {
-        //     console.log(card.value)
-        //     if (card.value === 1) {
-        //         dealerMax = dCardsSum + 10
-        //         console.log("ace")
-        //     } else {
-        //         dealerMax = dCardsSum
-        //     }
-        //     }
-    
-
-        // if player and dealer both have blackjack, it's a tie
+        // if player and dealer both have blackjack, it's a tie, game over
         if ((dCardsSum === 21 || dealerMax === 21) && (pCardsSum === 21 || playerMax === 21)) {
             endOfGameMessage = "Tied, game over. Play again!"
         // if dealer has 21, dealer wins, game over
@@ -116,6 +90,7 @@ function Blackjack(props) {
             ((pCardsSum === 21 || playerMax === 21)) {
                 endOfGameMessage = "Player wins. Play again!"
         }
+        // if none of the above conditions apply, start game
         else 
             {setGameActive (true)}
 }
@@ -125,8 +100,6 @@ function Blackjack(props) {
         let pCardsSum = pCardsTotal
         let dCardsSum = dCardsTotal
 
-        
-        console.log(pCardsSum)
         if (pCardsSum < 21) {
         // creating player's new hand with any added cards
         let playerNewHand = pCards
@@ -136,7 +109,6 @@ function Blackjack(props) {
         playerNewHand.push(allCardsCopy.shift())
         // adding sum of new card to player's hand
         pCardsSum += playerNewHand[playerNewHand.length-1].value
-        console.log(playerNewHand)
         // cards left in deck
         setAllCards (allCardsCopy)
         // player has 3 (or more) cards
@@ -148,7 +120,7 @@ function Blackjack(props) {
         setNumber (number + 1)
         // get total sum of player's cards
         setPCardsTotal (pCardsSum)
-        console.log(pCardsSum)
+
 
     }}
 
@@ -159,7 +131,6 @@ function Blackjack(props) {
         console.log(dCardsSum)
         let dealerNewHand = dCards
         let allCardsCopy = allCards
-
         // if dealer has less than 17, add a new card to dealer's hand
         if (dCardsSum < 17) {
             dealerNewHand.push(allCardsCopy.shift())
@@ -171,7 +142,6 @@ function Blackjack(props) {
         } else if (dCardsSum > pCardsSum) {
             endOfGameMessage = "Dealer wins. Play again!"
         } 
-        console.log(dCardsSum)
         // cards left in deck
         setAllCards (allCardsCopy)
         // dealer has 3 (or more) cards if dealer took hits
@@ -179,16 +149,20 @@ function Blackjack(props) {
         setNumber (number + 1)
         // get total sum of dealer's cards
         setDCardsTotal (dCardsSum)
-        console.log(dCardsSum)
+
     }
+
+    // function gameOver() {
+        
+    // }
 
     let buttons
     if (gameActive) {
         buttons =  
         <div className="actionControls">
-        <button className="hit" onClick={addPlayerCard}>Hit</button>
-        <br></br>
-        <button className="stand" onClick={addDealerCard}>Stand</button>
+            <button className="hit" onClick={addPlayerCard}>Hit</button>
+            <br></br>
+            <button className="stand" onClick={addDealerCard}>Stand</button>
         </div>
        } else {buttons = <div className="actionControls"/>}
     
@@ -209,7 +183,6 @@ function Blackjack(props) {
 
             <div>
             {dCards.map((card, index) => {
-                // console.log(dCards)
                 return (
                     notDTurn && index === 0 ?
                     <img className="back" src="./assets/Back.jpeg" alt="card back" /> :

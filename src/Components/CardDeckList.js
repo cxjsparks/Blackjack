@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom";
+import dotenv from "dotenv";
 
 
 
@@ -7,7 +8,10 @@ const CardDeckList = () => {
 
 
         return [
-            {source: "/assets/ClubsAce.svg", value: 1},
+            // {src={process.env.PUBLIC_URL + "/git.png"}},
+            // {src={process.env.PUBLIC_URL + "/assets/ClubsAce.svg"}},
+            {src: process.env.PUBLIC_URL + "/assets/ClubsAce.svg"},
+            // {source: "/assets/ClubsAce.svg", value: 1},
             {source: "/assets/Clubs2.svg", value: 2},
             {source: "/assets/Clubs3.svg", value: 3},
             {source: "/assets/Clubs4.svg", value: 4},

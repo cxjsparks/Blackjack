@@ -187,6 +187,9 @@ function Blackjack(props) {
                     notDTurn && index === 0 ?
                     <img className="back" src="./assets/Back.jpeg" alt="card back" /> :
                     <img className="cards" src={card.source} key={card.source}></img>
+
+                    // src={process.env.PUBLIC_URL + "/git.png"}
+                    // src={process.env.PUBLIC_URL + "/git.png"}
                 )
                 }
                 )

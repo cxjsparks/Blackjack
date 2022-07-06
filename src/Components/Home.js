@@ -4,13 +4,15 @@ import { Link } from "react-router-dom"
 
 const Home = ()=> {
     return (
-        <div>
-            <h1>Welcome to CJ's Game of Blackjack!</h1>
-            <br />
-            <h3>If you've never played or are a beginner, here are some general guidelines for standing or hitting, based on what the dealer and you are showing.</h3>
+        <div className="home">
+            <h3>Welcome to CJ's Game of Blackjack!</h3>
+            <h4>If you've never played or are a beginner, here are some general guidelines for standing or hitting, based on what the dealer and you are showing.</h4>
+            <h4> Attempt to beat the dealer by getting a count as close to 21 as possible, without going over. Aces are worth 1 or 11, and facecards (Jacks, Queens and Kings) are worth 10. Once the player and dealer have 2 cards (dealer's first card is face down), player can hit or stand based on their own cards. Once player stands, dealer must hit if hand is less than 17. Whoever has the higher hand wins. If either has blackjack on deal, that hand wins. If both have blackjack, it's a push (tie).</h4>
+
             <ul className="play">
-                <Link className="link" style={{textDecoration: "none", color: "red" }} to="/blackjack">Let's Play!</Link>
+                <Link style={{textDecoration: "none", color: "black" }} to="/blackjack">Click to Play!</Link>
             </ul>
+
         </div>
     )
 }

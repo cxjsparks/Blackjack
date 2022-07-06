@@ -169,7 +169,7 @@ function Blackjack(props) {
     return (
         <div>
             <div>
-                <p>Start your game!</p>
+                <h3>Start your game!</h3>
                 <button onClick={handleGameStart}>
                     Deal
                 </button>
@@ -192,13 +192,7 @@ function Blackjack(props) {
                 )
             }
             </div>
-
-
-
             {buttons}
-
-
-
             <div>
             {pCards.map(card => (
                     <img className="cards" src={card.source} key={card.source}></img>

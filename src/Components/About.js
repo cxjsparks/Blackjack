@@ -9,7 +9,7 @@ const About = () => {
                 <h2>Hi! I'm Chloe.</h2>
                 <p>After too many years as a receptionist in a law firm, I decided it was time to make myself uncomfortable. How best to do that? Jump into tech!</p>
                 <p>It's been challenging, probably the hardest thing I've ever done career-wise. I cried and laughed, and most importantly, I found a great community of which to be a part.</p>
-                <p>For my final GA project, I chose to create a React Blackjack app, despite being most frustrated and uncomfortable with that language. I decided I needed the challenge.</p>
+                <p>For my final GA project, I chose to create a Blackjack app using React, despite being most frustrated and uncomfortable with that language. I decided I needed the challenge.</p>
             </div>
 
             <ul className="play">

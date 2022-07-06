@@ -16,7 +16,8 @@ const About = () => {
                 <Link style={{textDecoration: "none", color: "black" }} to="/blackjack">Click to Play!</Link>
                 <br></br>
                 <br></br>
-                <Link to="/https://www.linkedin.com/in/chloe-jager/">LinkedIn</Link>
+                {/* <Link to="/https://www.linkedin.com/in/chloe-jager/">LinkedIn</Link> */}
+                <a href="/https://www.linkedin.com/in/chloe-jager/">LinkedIn</a>
                 <br></br>
                 <a href="mailto:cxjmeister@gmail.com">Contact Me</a>
             </ul>

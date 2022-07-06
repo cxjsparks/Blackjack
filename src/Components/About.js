@@ -17,7 +17,7 @@ const About = () => {
                 <br></br>
                 <br></br>
                 {/* <Link to="/https://www.linkedin.com/in/chloe-jager/">LinkedIn</Link> */}
-                <a href="/https://www.linkedin.com/in/chloe-jager/">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/chloe-jager/">LinkedIn</a>
                 <br></br>
                 <a href="mailto:cxjmeister@gmail.com">Contact Me</a>
             </ul>
